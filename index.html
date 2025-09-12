@@ -28,8 +28,8 @@
     .brand{
       display:flex; align-items:center; gap:14px;
     }
-    .logo{
-     
+    .logo img{ 
+    	display:block; border-radius:12px; 
     }
     h1{ font-size: clamp(20px, 3.4vw, 28px); margin:0 }
     .tools{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
@@ -212,15 +212,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Timestamp
-  const updated = document.getElementById('updated');
-  if (updated) updated.textContent = new Date().toLocaleDateString();
+// Timestamp
+const updated = document.getElementById('updated');
+if (updated) {
+  const d = new Date(document.lastModified || Date.now());
+  updated.textContent = d.toLocaleDateString();
+  updated.title = d.toLocaleString(); // hover for exact time
+}
 
-  // Improve external link semantics
-  document.querySelectorAll('a[target="_blank"]').forEach(a=>{
-    a.setAttribute('rel','noopener'); // add noreferrer if you prefer
-    a.setAttribute('aria-label', (a.textContent.trim() + ' (opens in new tab)').trim());
-  });
+
+// External link semantics (append, don't overwrite)
+document.querySelectorAll('a[target="_blank"]').forEach(a => {
+  a.relList.add('noopener', 'noreferrer');
+  a.setAttribute('aria-label', (a.textContent.trim() + ' (opens in new tab)').trim());
 });
 </script>
 </body>
