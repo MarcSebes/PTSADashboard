@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch(window.location.href, { method: 'HEAD', cache: 'no-store' });
       const lm = res.headers.get('Last-Modified');
       const d = lm ? new Date(lm) : new Date(document.lastModified || Date.now());
-      updated.textContent = d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+      updated.textContent = d.toLocaleString();
       updated.title = d.toLocaleString();
     } catch (e) {
       const d = new Date(document.lastModified || Date.now());
