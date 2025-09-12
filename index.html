@@ -76,7 +76,9 @@
   <div class="wrap">
     <header role="banner" aria-label="Portal header">
       <div class="brand">
-        <div class="logo" aria-hidden="true"><image src="PTSA-Logo-Transparent.png" height="52"></div>
+       <div class="logo" aria-hidden="true">
+       		<img src="PTSA-Logo-Transparent.png" alt="FLEX PTSA" height="52" width="120" decoding="async">
+       	</div>
         <div>
           <div class="tag">FLEX PTSA</div>
           <h1>Leadership Team Portal</h1>
@@ -144,7 +146,7 @@
         <div class="links">
           <a href="https://crossroadsflex.givebacks.com/shop" target="_blank" rel="noopener">Givebacks Store <span class="pill">store</span></a>
           <a href="https://crossroadsflex.givebacks.com/dashboard" target="_blank" rel="noopener">Givebacks Admin <span class="pill">admin</span></a>
-          <a href="xhttps://docs.google.com/spreadsheets/d/1PHnmgpq3bYQw9ygGQVX2mIQUz1hdC_eEk_kmFG3YPPw/edit?usp=sharing" target="_blank" rel="noopener">Fundraising Tracker <span class="pill">sheet</span></a>
+          <a href="https://docs.google.com/spreadsheets/d/1PHnmgpq3bYQw9ygGQVX2mIQUz1hdC_eEk_kmFG3YPPw/edit?usp=sharing" target="_blank" rel="noopener">Fundraising Tracker <span class="pill">sheet</span></a>
         </div>
       </article>
 
@@ -183,8 +185,10 @@
   </div>
 
   <script>
-    // Filter links
-    const q = document.getElementById('q');
+document.addEventListener('DOMContentLoaded', () => {
+  // Filter links
+  const q = document.getElementById('q');
+  if (q) {
     q.addEventListener('input', () => {
       const term = q.value.toLowerCase().trim();
       document.querySelectorAll('#cards .card').forEach(card => {
@@ -192,26 +196,31 @@
         card.style.display = text.includes(term) ? '' : 'none';
       });
     });
+  }
 
-    // Theme toggle (light/dark)
-    const btn = document.getElementById('themeBtn');
+  // Theme toggle (only if the button exists)
+  const btn = document.getElementById('themeBtn');
+  if (btn) {
     const key = 'ptsa-theme';
-    const setTheme = (t)=>document.documentElement.dataset.theme=t;
+    const setTheme = t => document.documentElement.dataset.theme = t;
     const saved = localStorage.getItem(key);
-    if(saved) setTheme(saved);
-    btn.addEventListener('click', ()=>{
+    if (saved) setTheme(saved);
+    btn.addEventListener('click', () => {
       const cur = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
       setTheme(cur); localStorage.setItem(key, cur);
-      // let system dark mode still influence colors; this is a simple hint
     });
+  }
 
-    // Timestamp
-    document.getElementById('updated').textContent = new Date().toLocaleDateString();
+  // Timestamp
+  const updated = document.getElementById('updated');
+  if (updated) updated.textContent = new Date().toLocaleDateString();
 
-    // Improve external link semantics
-    document.querySelectorAll('a[target="_blank"]').forEach(a=>{
-      a.setAttribute('aria-label', (a.textContent.trim() + ' (opens in new tab)').trim());
-    });
-  </script>
+  // Improve external link semantics
+  document.querySelectorAll('a[target="_blank"]').forEach(a=>{
+    a.setAttribute('rel','noopener'); // add noreferrer if you prefer
+    a.setAttribute('aria-label', (a.textContent.trim() + ' (opens in new tab)').trim());
+  });
+});
+</script>
 </body>
 </html>
