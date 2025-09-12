@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FLEX PTSA – Leadership Team Portal</title>
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root{
+      --bg: #ffffff; --text: #0f172a; --muted:#64748b; --card:#ffffff; --border:#e2e8f0;
+      --accent:#0b1b3a; /* FLEX navy */
+      --accent-2:#cb9700; /* CFHS gold */
+      --radius:16px; --shadow: 0 6px 24px rgba(2,6,23,.08);
+    }
+    @media (prefers-color-scheme: dark){
+      :root{ --bg:#0b1220; --text:#e5e7eb; --muted:#94a3b8; --card:#0f172a; --border:#1f2937; --shadow:none; }
+    }
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font:16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    }
+    .wrap{ max-width:1100px; margin:0 auto; padding:28px 20px 56px }
+    header{
+      display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:14px;
+    }
+    .logo{
+      width:52px; height:52px; border-radius:12px;
+      background:linear-gradient(145deg,var(--accent),var(--accent-2)); box-shadow:var(--shadow);
+      display:grid; place-items:center; color:white; font-weight:800;
+    }
+    h1{ font-size: clamp(20px, 3.4vw, 28px); margin:0 }
+    .tools{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
+    input[type="search"]{
+      appearance:none; border:1px solid var(--border); background:var(--card); color:var(--text);
+      border-radius:999px; padding:10px 14px; min-width:220px; outline:none;
+    }
+    input[type="search"]:focus{ border-color:var(--accent-2); box-shadow:0 0 0 4px color-mix(in srgb, var(--accent-2) 18%, transparent) }
+    .toggle{
+      border:1px solid var(--border); background:var(--card); color:var(--text);
+      border-radius:999px; padding:10px 14px; cursor:pointer;
+    }
+    .grid{
+      display:grid; gap:16px;
+      grid-template-columns: repeat( auto-fit, minmax(260px, 1fr) );
+      margin-top:12px;
+    }
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:18px; display:flex; flex-direction:column; gap:12px;
+    }
+    .ctitle{ display:flex; align-items:center; gap:12px; }
+    .ctitle .icon{ font-size:28px; }
+    .ctitle h2{ font-size:18px; margin:0 }
+    .links{ display:flex; flex-direction:column; gap:10px; margin-top:4px; }
+    .links a{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      text-decoration:none; color:var(--text); background: color-mix(in srgb, var(--accent) 5%, var(--card));
+      border:1px solid var(--border); padding:10px 12px; border-radius:12px;
+      transition: transform .05s ease, background .2s ease, border-color .2s ease;
+    }
+    .links a:hover{ transform: translateY(-1px); border-color: color-mix(in srgb, var(--accent-2) 40%, var(--border)); }
+    .links a:focus{ outline:4px solid color-mix(in srgb, var(--accent-2) 25%, transparent); outline-offset:2px }
+    .pill{ font-size:12px; padding:3px 8px; border-radius:999px; border:1px solid var(--border); color:var(--muted) }
+    footer{
+      margin-top:22px; color:var(--muted); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .tag{ color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em }
+    .accent{ color:var(--accent-2) }
+    /* optional brand bar */
+    .bar{ height:6px; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); margin:10px 0 6px }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header role="banner" aria-label="Portal header">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">CF</div>
+        <div>
+          <div class="tag">Leadership Team</div>
+          <h1>FLEX PTSA Portal</h1>
+        </div>
+      </div>
+      <div class="tools">
+        <input id="q" type="search" placeholder="Filter links…" aria-label="Filter links" />
+        <button class="toggle" id="themeBtn" type="button" aria-label="Toggle theme">🌓 Theme</button>
+      </div>
+    </header>
+    <div class="bar" aria-hidden="true"></div>
+
+    <!-- ===== DATA (edit this) ===== -->
+    <section class="grid" id="cards" aria-label="Portal sections">
+      <!-- PTSA -->
+      <article class="card" data-section="ptsa">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">🛡️</div>
+          <h2>PTSA</h2>
+        </div>
+        <div class="links">
+          <a href="https://example.com" target="_blank" rel="noopener">
+            PTSA Website <span class="pill">external ↗</span>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener">Facebook <span class="pill">social</span></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram <span class="pill">social</span></a>
+          <a href="https://drive.google.com" target="_blank" rel="noopener">Google Drive <span class="pill">drive</span></a>
+        </div>
+      </article>
+
+      <!-- Finance -->
+      <article class="card" data-section="finance">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">💰</div>
+          <h2>Finance</h2>
+        </div>
+        <div class="links">
+          <a href="#" target="_blank" rel="noopener">Money Minder <span class="pill">finance</span></a>
+        </div>
+      </article>
+
+      <!-- Store -->
+      <article class="card" data-section="store">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">👕</div>
+          <h2>Store</h2>
+        </div>
+        <div class="links">
+          <a href="#" target="_blank" rel="noopener">Givebacks Store <span class="pill">store</span></a>
+          <a href="#" target="_blank" rel="noopener">Givebacks Admin <span class="pill">admin</span></a>
+          <a href="#" target="_blank" rel="noopener">Fundraising Tracker <span class="pill">sheet</span></a>
+        </div>
+      </article>
+
+      <!-- Volunteer -->
+      <article class="card" data-section="volunteer">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">❤️</div>
+          <h2>Volunteer</h2>
+        </div>
+        <div class="links">
+          <a href="#" target="_blank" rel="noopener">Sign-Up Genius <span class="pill">forms</span></a>
+          <a href="#" target="_blank" rel="noopener">Sign-Up Genius Admin? <span class="pill">admin</span></a>
+          <a href="#" target="_blank" rel="noopener">Interest Form <span class="pill">forms</span></a>
+        </div>
+      </article>
+
+      <!-- Calendar -->
+      <article class="card" data-section="calendar">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">📅</div>
+          <h2>Calendar</h2>
+        </div>
+        <div class="links">
+          <a href="#" target="_blank" rel="noopener">PTSA Google Calendar <span class="pill">calendar</span></a>
+          <a href="#" target="_blank" rel="noopener">FLEX School Calendar <span class="pill">calendar</span></a>
+        </div>
+      </article>
+
+      <!-- School -->
+      <article class="card" data-section="school">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">🎓</div>
+          <h2>School</h2>
+        </div>
+        <div class="links">
+          <a href="#" target="_blank" rel="noopener">School Website <span class="pill">site</span></a>
+          <a href="#" target="_blank" rel="noopener">Facebook <span class="pill">social</span></a>
+          <a href="#" target="_blank" rel="noopener">Instagram <span class="pill">social</span></a>
+          <a href="#" target="_blank" rel="noopener">Parent Dashboard <span class="pill">portal</span></a>
+        </div>
+      </article>
+    </section>
+    <!-- ===== end DATA ===== -->
+
+    <footer role="contentinfo">
+      <div>Last updated <span class="accent" id="updated"></span></div>
+      <div>Keyboard: Tab to focus, Enter to open.</div>
+    </footer>
+  </div>
+
+  <script>
+    // Filter links
+    const q = document.getElementById('q');
+    q.addEventListener('input', () => {
+      const term = q.value.toLowerCase().trim();
+      document.querySelectorAll('#cards .card').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(term) ? '' : 'none';
+      });
+    });
+
+    // Theme toggle (light/dark)
+    const btn = document.getElementById('themeBtn');
+    const key = 'ptsa-theme';
+    const setTheme = (t)=>document.documentElement.dataset.theme=t;
+    const saved = localStorage.getItem(key);
+    if(saved) setTheme(saved);
+    btn.addEventListener('click', ()=>{
+      const cur = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      setTheme(cur); localStorage.setItem(key, cur);
+      // let system dark mode still influence colors; this is a simple hint
+    });
+
+    // Timestamp
+    document.getElementById('updated').textContent = new Date().toLocaleDateString();
+
+    // Improve external link semantics
+    document.querySelectorAll('a[target="_blank"]').forEach(a=>{
+      a.setAttribute('aria-label', (a.textContent.trim() + ' (opens in new tab)').trim());
+    });
+  </script>
+</body>
+</html>
