@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FLEX PTSA – Leadership Team Portal</title>
+  <link rel="icon" href="favicon.ico">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root{
+      --bg: #ffffff; --text: #0f172a; --muted:#64748b; --card:#ffffff; --border:#e2e8f0;
+      --accent:#002554; /* FLEX navy */
+      --accent-2:#cb9700; /* FLEX gold */
+      --radius:16px; --shadow: 0 6px 24px rgba(2,6,23,.08);
+    }
+
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font:16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    }
+    .wrap{ max-width:1100px; margin:0 auto; padding:28px 20px 56px }
+    header{
+      display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:14px;
+    }
+    .logo img{ 
+    	display:block; border-radius:12px; 
+    }
+    h1{ font-size: clamp(20px, 3.4vw, 28px); margin:0 }
+    .tools{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
+    input[type="search"]{
+      appearance:none; border:1px solid var(--border); background:var(--card); color:var(--text);
+      border-radius:999px; padding:10px 14px; min-width:220px; outline:none;
+    }
+    input[type="search"]:focus{ border-color:var(--accent-2); box-shadow:0 0 0 4px color-mix(in srgb, var(--accent-2) 18%, transparent) }
+    .toggle{
+      border:1px solid var(--border); background:var(--card); color:var(--text);
+      border-radius:999px; padding:10px 14px; cursor:pointer;
+    }
+    .grid{
+      display:grid; gap:16px;
+      grid-template-columns: repeat( auto-fit, minmax(260px, 1fr) );
+      margin-top:12px;
+    }
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:18px; display:flex; flex-direction:column; gap:12px;
+    }
+    .ctitle{ display:flex; align-items:center; gap:12px; }
+    .ctitle .icon{ font-size:28px; }
+    .ctitle h2{ font-size:18px; margin:0 }
+    .links{ display:flex; flex-direction:column; gap:10px; margin-top:4px; }
+    .links a{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      text-decoration:none; color:var(--text); background: color-mix(in srgb, var(--accent) 5%, var(--card));
+      border:1px solid var(--border); padding:10px 12px; border-radius:12px;
+      transition: transform .05s ease, background .2s ease, border-color .2s ease;
+    }
+    .links a:hover{ transform: translateY(-1px); border-color: color-mix(in srgb, var(--accent-2) 40%, var(--border)); }
+    .links a:focus{ outline:4px solid color-mix(in srgb, var(--accent-2) 25%, transparent); outline-offset:2px }
+    .pill{ font-size:12px; padding:3px 8px; border-radius:999px; border:1px solid var(--border); color:var(--muted) }
+    footer{
+      margin-top:22px; color:var(--muted); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .tag{ color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em }
+    .accent{ color:var(--accent-2) }
+    /* optional brand bar */
+    .bar{ height:6px; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); margin:10px 0 6px }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+  <div id="links">Loading links...</div>
+
+  <script>
+    fetch("links.md")
+      .then(response => response.text())
+      .then(text => {
+        document.getElementById("links").innerHTML = marked.parse(text);
+      })
+      .catch(err => {
+        document.getElementById("links").innerHTML = "Error loading links.";
+        console.error(err);
+      });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <header role="banner" aria-label="Portal header">
+      <div class="brand">
+       <div class="logo" aria-hidden="true">
+       		<img src="PTSA-Logo-Transparent.png" alt="FLEX PTSA" height="52" width="120" decoding="async">
+       	</div>
+        <div>
+          <div class="tag">FLEX PTSA</div>
+          <h1>Leadership Team Portal</h1>
+        </div>
+      </div>
+      <div class="tools">
+        <input id="q" type="search" placeholder="Filter links…" aria-label="Filter links" />
+       
+       <!-- 
+        <button class="toggle" id="themeBtn" type="button" aria-label="Toggle theme">🌓 Theme</button>
+        -->
+      </div>
+    </header>
+    <div class="bar" aria-hidden="true"></div>
+
+    <!-- ===== DATA (edit this) ===== -->
+    <section class="grid" id="cards" aria-label="Portal sections">
+      <!-- PTSA -->
+      <article class="card" data-section="ptsa">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">🍹</div>
+          <h2>FLEX PTSA</h2>
+        </div>
+        <div class="links">
+          <a href="https://www.crossroadsflexptsa.org" target="_blank" rel="noopener">
+            PTSA Website <span class="pill">external ↗</span>
+          </a>
+          <a href="https://www.facebook.com/crossroadsflexhsptsa" target="_blank" rel="noopener">Facebook <span class="pill">social</span></a>
+          <a href="https://instagram.com/crossroadsflexptsa" target="_blank" rel="noopener">Instagram <span class="pill">social</span></a>
+          <a href="https://drive.google.com/drive/folders/14TN5mhiE46Vmk952Grbqqt2YTmkByG1G?usp=sharing" target="_blank" rel="noopener">Google Drive <span class="pill">drive</span></a>
+        </div>
+      </article>
+      
+      <!-- School -->
+      <article class="card" data-section="school">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">🎓</div>
+          <h2>School</h2>
+        </div>
+        <div class="links">
+          <a href="https://www.wcpss.net/crossroadsflex" target="_blank" rel="noopener">School Website <span class="pill">site</span></a>
+          <a href="https://www.facebook.com/people/Crossroads-FLEX-High-School/100095555411790/?mibextid=eQY6cl" target="_blank" rel="noopener">Facebook <span class="pill">social</span></a>
+          <a href="https://www.instagram.com/crossroadsflex/" target="_blank" rel="noopener">Instagram <span class="pill">social</span></a>
+          <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vR36ClY0aKg3OLH1nDjGf69Gxkr5_2YcmL3lE8IHGIMelzbZJSTNTdoDfJcbW7T4po1GgrQQT3pTjGh/pubhtml" target="_blank" rel="noopener">Parent Dashboard <span class="pill">portal</span></a>
+        </div>
+      </article>
+      
+      <!-- Finance -->
+      <article class="card" data-section="finance">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">💰</div>
+          <h2>Finance</h2>
+        </div>
+        <div class="links">
+          <a href="https://app.moneyminder.com/login" target="_blank" rel="noopener">Money Minder <span class="pill">finance</span></a>
+          <a href="https://docs.google.com/spreadsheets/d/1PHnmgpq3bYQw9ygGQVX2mIQUz1hdC_eEk_kmFG3YPPw/edit?usp=sharing" target="_blank" rel="noopener">Fundraising Tracker <span class="pill">sheet</span></a>
+        </div>
+      </article>
+
+      <!-- Store -->
+      <article class="card" data-section="store">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">👕</div>
+          <h2>Store</h2>
+        </div>
+        <div class="links">
+          <a href="https://crossroadsflex.givebacks.com/shop" target="_blank" rel="noopener">Givebacks Store <span class="pill">store</span></a>
+          <a href="https://crossroadsflex.givebacks.com/dashboard" target="_blank" rel="noopener">Givebacks Admin <span class="pill">admin</span></a>
+          
+        </div>
+      </article>
+
+      <!-- Volunteer -->
+      <article class="card" data-section="volunteer">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">🦮</div>
+          <h2>Volunteer</h2>
+        </div>
+        <div class="links">
+          <a href="https://www.signupgenius.com/go/10C0D4CA9A628A6F4C52-50407712-volunteer#/" target="_blank" rel="noopener">Sign-Up Genius <span class="pill">forms</span></a>
+          <a href="https://forms.gle/bo7Y3jTCNP82eKBaA" target="_blank" rel="noopener">Interest Form <span class="pill">forms</span></a>
+        </div>
+      </article>
+
+      <!-- Calendar -->
+      <article class="card" data-section="calendar">
+        <div class="ctitle">
+          <div class="icon" aria-hidden="true">📅</div>
+          <h2>Calendar</h2>
+        </div>
+        <div class="links">
+          <a href="https://www.crossroadsflexptsa.org/calendar" target="_blank" rel="noopener">PTSA Google Calendar <span class="pill">calendar</span></a>
+          <a href="https://www.wcpss.net/Page/5424#calendar11750/20250912/month" target="_blank" rel="noopener">FLEX School Calendar <span class="pill">calendar</span></a>
+        </div>
+      </article>
+
+
+    </section>
+    <!-- ===== end DATA ===== -->
+
+    <footer role="contentinfo">
+      <div>Last updated <span class="accent" id="updated"></span></div>
+      <div>Keyboard: Tab to focus, Enter to open.</div>
+    </footer>
+  </div>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Filter links
+  const q = document.getElementById('q');
+  if (q) {
+    q.addEventListener('input', () => {
+      const term = q.value.toLowerCase().trim();
+      document.querySelectorAll('#cards .card').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(term) ? '' : 'none';
+      });
+    });
+  }
+
+  // Theme toggle (only if button exists)
+  const btn = document.getElementById('themeBtn');
+  if (btn) {
+    const key = 'ptsa-theme';
+    const setTheme = t => document.documentElement.dataset.theme = t;
+    const saved = localStorage.getItem(key);
+    if (saved) setTheme(saved);
+    btn.addEventListener('click', () => {
+      const cur = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      setTheme(cur); localStorage.setItem(key, cur);
+    });
+  }
+
+  // Robust "Last updated"
+  (async () => {
+    const updated = document.getElementById('updated');
+    if (!updated) return;
+
+    try {
+      const res = await fetch(window.location.href, { method: 'HEAD', cache: 'no-store' });
+      const lm = res.headers.get('Last-Modified');
+      const d = lm ? new Date(lm) : new Date(document.lastModified || Date.now());
+      updated.textContent = d.toLocaleString();
+      updated.title = d.toLocaleString();
+    } catch (e) {
+      const d = new Date(document.lastModified || Date.now());
+      updated.textContent = d.toLocaleDateString();
+      updated.title = d.toLocaleString();
+    }
+  })();
+
+  // External link semantics (append safely)
+  document.querySelectorAll('a[target="_blank"]').forEach(a => {
+    if (a.relList && a.relList.add) a.relList.add('noopener','noreferrer');
+    else a.setAttribute('rel', ((a.getAttribute('rel')||'') + ' noopener noreferrer').trim());
+    a.setAttribute('aria-label', (a.textContent.trim() + ' (opens in new tab)').trim());
+  });
+});
+</script>
+</body>
+</html>
