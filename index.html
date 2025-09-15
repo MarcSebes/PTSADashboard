@@ -102,6 +102,23 @@
 
   <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Edit Links 
+  const editBtn = document.getElementById('editLinksBtn');
+  if (editBtn) {
+    // Try to infer owner/repo from GitHub Pages URL structure
+    const owner = (location.hostname.endsWith('.github.io') && location.hostname.split('.')[0]) || 'flexptsa';
+    const repo  = (location.pathname.split('/').filter(Boolean)[0]) || 'PTSADashboard';
+    const branch = 'main'; // change to 'gh-pages' if you use that as default
+    const fallback = 'https://github.com/flexptsa/PTSADashboard/edit/main/links.md';
+
+    try {
+      const url = `https://github.com/${owner}/${repo}/edit/${branch}/links.md`;
+      editBtn.href = url;
+    } catch {
+      editBtn.href = fallback;
+    }
+  }
+
     // Filter links by search term
     const q = document.getElementById('q');
     if (q) {
